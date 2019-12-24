@@ -1,49 +1,73 @@
 var titulo = document.querySelector('.titulo')
+var botaoaddicionarPaciente = document.querySelector('#adicionar-paciente')
+//Previnindo o comportamento padrão
+botaoaddicionarPaciente.addEventListener("click", function (event) {
+    event.preventDefault()
+    adicionarPaciente()
+})
 
-var pacientes = document.querySelectorAll('.paciente')
 
-for (i = 0; i < pacientes.length; i++) {
-    var paciente = pacientes[i]
+function adicionarPaciente(){
+    var form = document.querySelector('#form-adicionar')
+    var pacientes = obtemPacienteDoFormulario(form)
+    
+    //Cria novo registro Tr para o paciente
+    var pacinteTr = montaTr(pacientes)
+    var tabela = document.querySelector('#tabela-pacientes')
+    tabela.appendChild(pacinteTr)
 
-    //Peso
-    var objpeso = paciente.querySelector('.info-peso')
-    var vlpeso = objpeso.textContent
-    //Altura
-    var objaltura = paciente.querySelector('.info-altura')
-    var vlaltura = objaltura.textContent
-    //Imc
-    var imc = vlpeso / (Math.pow(vlaltura, 2))
-    var objimc = paciente.querySelector('.info-imc')
+    //Valida o form
+    var pacientesParaValidar = document.querySelectorAll(".paciente")
+    ValidaImc(pacientesParaValidar)
+    form.reset()
 
-    // Msg Erro
-    var alturaok = true
-    var pesook = true
+}
 
-    if (vlpeso <= 0 || vlpeso >= 400) {
-        objimc.textContent = 'Peso Inválido!'
-        pesook = false
-        paciente.classList.add("campo-invalido")
+// titulo.addEventListener("click", mostramensagem)
+// function mostramensagem(){
+//     console.log("Fui clicado")
+// }
+
+//Outra forma de fazer o comando acima
+titulo.addEventListener("click", function () {
+    console.log("Fui clicado")
+})
+
+// //Mesmo evento acima previnindo o comportamento padrão
+// botaoadd.addEventListener("click", function (event) {
+//     event.preventDefault()
+
+
+
+function calculaImc(peso, altura) {
+    var imc = peso / (altura * altura)
+    return imc.toFixed(2)
+}
+
+function montaTr(pacientes) {
+    var tr = document.createElement("tr")
+    tr.classList.add("paciente")
+    tr.appendChild(montaTd(pacientes.nome, "info-nome"))
+    tr.appendChild(montaTd(pacientes.peso, "info-peso"))
+    tr.appendChild(montaTd(pacientes.altura, "info-altura"))
+    tr.appendChild(montaTd(pacientes.gordura, "info-gordura"))
+    tr.appendChild(montaTd(pacientes.imc, "info-imc"))
+    return tr
+}
+
+function montaTd(valor, classe) {
+    var td = document.createElement("td")
+    td.textContent = valor
+    td.classList.add(classe)
+    return td
+}
+
+function obtemPacienteDoFormulario(form) {
+    var pacientes = {
+        nome: form.nome.value,
+        peso: form.peso.value,
+        altura: form.altura.value,
+        gordura: form.gordura.value
     }
-
-    if (vlaltura <= 0 || vlaltura >= 3.0) {
-        objimc.textContent = 'Altura Inválida!'
-        alturaok = false
-        paciente.classList.add("campo-invalido")
-    }
-
-    //Exibe imc para peso e altura válidos
-    if (alturaok && pesook) {
-        objimc.textContent =  imc.toFixed(1)
-    }
-
-    // titulo.addEventListener("click", mostramensagem)
-    // function mostraMensagem(){
-    //     console.log("Fui clicado")
-    // }
-
-    titulo.addEventListener("click", mostramensagem)
-    function mostraMensagem(){
-        console.log("Fui clicado")
-    }
-
+    return pacientes
 }
