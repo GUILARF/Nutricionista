@@ -7,19 +7,25 @@ botaoaddicionarPaciente.addEventListener("click", function (event) {
 })
 
 
-function adicionarPaciente(){
+function adicionarPaciente() {
     var form = document.querySelector('#form-adicionar')
-    var pacientes = obtemPacienteDoFormulario(form)
-    
-    //Cria novo registro Tr para o paciente
-    var pacinteTr = montaTr(pacientes)
-    var tabela = document.querySelector('#tabela-pacientes')
-    tabela.appendChild(pacinteTr)
+    var paciente = obtemPacienteDoFormulario(form)
 
-    //Valida o form
-    var pacientesParaValidar = document.querySelectorAll(".paciente")
-    ValidaImc(pacientesParaValidar)
-    form.reset()
+    var pacienteok = validaPaciente(paciente)
+    if (pacienteok) {
+        //Cria novo registro Tr para o paciente
+        var pacinteTr = montaTr(paciente)
+        var tabela = document.querySelector('#tabela-pacientes')
+        tabela.appendChild(pacinteTr)
+
+        //Valida o form
+        var pacientesParaValidar = document.querySelectorAll(".paciente")
+        ValidaImc(pacientesParaValidar)
+        form.reset()
+    }
+    else return
+
+
 
 }
 
@@ -70,4 +76,17 @@ function obtemPacienteDoFormulario(form) {
         gordura: form.gordura.value
     }
     return pacientes
+}
+
+function validaPaciente(paciente) {
+    if (paciente.peso <= 0 || paciente.peso >= 400) {
+        return false
+        //paciente.classList.add("campo-invalido")
+    }
+
+    if (paciente.altura <= 0 || paciente.altura >= 3.0) {
+        return false
+        //paciente.classList.add("campo-invalido")
+    }
+    return true
 }
