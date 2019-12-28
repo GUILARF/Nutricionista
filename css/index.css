@@ -132,3 +132,18 @@ button[disabled=disabled], button:disabled {
 .campo-invalido{
 	background-color:  lightcoral;
 }
+
+#filtrar{
+	width: 200px;
+	height: 35px;
+	margin-bottom: 10px;
+}
+
+.fadeOut{
+	opacity: 0;
+	transition: 0.5s;
+}
+
+.invisivel{
+	display: none;
+}

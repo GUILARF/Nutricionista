@@ -20,6 +20,8 @@
 	<main>
 		<section class="container">
 			<h2>Meus pacientes</h2>
+			<label for="filtrar">Filtre:</label>
+			<input type="text" name="filtrar" id="filtrar" placeholder="Digite o nome do paciente">
 			<table>
 				<thead>
 					<tr>
@@ -89,7 +91,7 @@
 				<label for="altura">Altura:</label>
 				<input id="altura" name="altura" type="text" placeholder="digite a altura do seu paciente" class="campo campo-medio" >
 			</div>
-			<div class=" grupo">
+			<div class="grupo">
 				<label for="gordura">% de Gordura:</label>
 				<input id="gordura" type="text" placeholder="digite a porcentagem de gordura do seu paciente" class="campo campo-medio" >
 			</div>
@@ -101,6 +103,7 @@
 	<script src="./js/principal.js"></script>
 	<script src="./js/remover-paciente.js"></script>
 	<script src="./js/calcula-imc.js"></script>
+	<script src="./js/filtra.js"></script>
 	
 </body>
 
