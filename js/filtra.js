@@ -7,26 +7,41 @@ pesquisa.addEventListener("input", function(){
         var nome = paciente.querySelector(".info-nome").textContent
         console.log(nome)
         console.log(this.value)
-        
-        
+        var regexp = new RegExp(this.value, "i") //i = case insensitive
 
         if(this.value.length > 0){
-            paciente.classList.add(".invisivel")
+            paciente.classList.add("invisivel")
+            console.log("entrou aqui " + this.value)
+
+            if(regexp.test(nome)){
+                paciente.classList.remove("invisivel")
+            }
+            else{
+                paciente.classList.add("invisivel")
+            }
+
+
         }
+        else{
+            paciente.classList.remove("invisivel")
+            console.log("entrou aqui2 " + this.value)
+            console.log(paciente)
+        } 
+            
 
     }
     
-    pacientes.forEach(paciente => {
+    // pacientes.forEach(paciente => {
         
 
        
 
-        if(nome != this.value){
-            paciente.classList.add(".invisivel")
-            console.log("fadeouting")
+    //     if(nome != this.value){
+    //         paciente.classList.add("invisivel")
+    //         console.log("fadeouting")
             
-        }
-    });
+    //     }
+    // });
 
 
 

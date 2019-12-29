@@ -3,13 +3,17 @@ var botaoaddicionarPaciente = document.querySelector('#adicionar-paciente')
 //Previnindo o comportamento padrão
 botaoaddicionarPaciente.addEventListener("click", function (event) {
     event.preventDefault()
-    adicionarPaciente()
+    var form = document.querySelector('#form-adicionar')
+    var paciente = obtemPacienteDoFormulario(form)
+    var inseriu = adicionarPaciente(paciente)
+    if (inseriu) {
+        form.reset()
+    } 
 })
 
 
-function adicionarPaciente() {
-    var form = document.querySelector('#form-adicionar')
-    var paciente = obtemPacienteDoFormulario(form)
+function adicionarPaciente(paciente) {
+    
 
     var pacienteok = validaPaciente(paciente)
     if (pacienteok) {
@@ -21,9 +25,9 @@ function adicionarPaciente() {
         //Valida o form
         var pacientesParaValidar = document.querySelectorAll(".paciente")
         ValidaImc(pacientesParaValidar)
-        form.reset()
+        return true
     }
-    else return
+    else return false
 
 
 
